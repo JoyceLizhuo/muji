@@ -1,0 +1,7 @@
+/* 全局的css变量 */
+:root {
+  --dangerColor: #f5222d;
+  --linkColor: #1890ff; /* 链接色 */
+  --mainPageNavHeight: 48px; /* mainPage的导航条的高度 */
+  --mainBgColor: #fff;
+}

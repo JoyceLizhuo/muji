@@ -1,0 +1,16 @@
+.main_page-nav_header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+  width: 100%;
+
+  & > .main_page-nav {
+    display: flex;
+    flex-basis: 100%;
+
+    & > .main_page-nav-list {
+      border-bottom: 0;
+    }
+  }
+}

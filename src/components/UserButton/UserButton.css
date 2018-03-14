@@ -1,0 +1,18 @@
+.main_page-user_btn {
+  display: flex;
+  align-items: center;
+
+  & .user_btn {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    & > .name {
+      margin-left: 4px;
+      display: inline-block;
+    }
+  }
+}

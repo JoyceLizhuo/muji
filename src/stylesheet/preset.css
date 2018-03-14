@@ -1,0 +1,32 @@
+/* 预设的通用样式 */
+.pointer:hover {
+  cursor: pointer;
+}
+
+.link {
+  color: var(--linkColor);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.dangerColor {
+  color: var(--dangerColor);
+}
+
+.dropdownBtn {
+  padding-left: 4px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignLeft {
+  text-align: left;
+}

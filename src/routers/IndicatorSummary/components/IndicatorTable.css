@@ -1,0 +1,11 @@
+.indicatorTable-wrap {
+  & .center {
+    text-align: center;
+  }
+  & table {
+    text-align: center;
+  }
+  & tr th {
+    text-align: center;
+  }
+}

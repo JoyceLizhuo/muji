@@ -1,0 +1,15 @@
+.main_page_layout {
+  min-width: 1200px;
+
+  & > .main_page_layout-header {
+    padding: 0 30px 0;
+    position: fixed;
+    z-index: 100;
+  }
+
+  & > .main_page_layout-body {
+    padding: calc(var(--mainPageNavHeight) + 20px) 30px 30px;
+    min-height: 100vh;
+    background: var(--mainBgColor);
+  }
+}
