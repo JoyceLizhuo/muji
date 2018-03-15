@@ -14,8 +14,9 @@ function getList (num) {
       indicatorStatus: '有效', // 指标状态
       underBiz: '业务A', // 所属业务
       createdBy: 'wyh', // 创建者
-      createdAt: '1520998254713', // 创建日期的时间戳
+      createdAt: `152099825471${i}`, // 创建日期的时间戳
       indicatorVersion: 'V1', // 指标版本
+      indicatorId: `id_${i}`,
     })
   }
   return r
@@ -35,11 +36,45 @@ module.exports = (req, res) => {
         createdBy: 'wyh', // 创建者
         createdAt: '1520998254713', // 创建日期的时间戳
         indicatorVersion: 'V1', // 指标版本
+        indicatorId: 'id_1', // 指标的唯一标识
       }],
     },
     r_2: {
       ok: true,
-      data: getList(120),
+      data: [{
+        indicatorName: 'KP101',
+        indicatorIntro: '介绍',
+        indicatorType: '基本指标',
+        dataSource: 'MySQL',
+        indicatorStatus: '有效',
+        underBiz: '业务B',
+        createdBy: 'wyh',
+        createdAt: '1520997254713',
+        indicatorVersion: 'V1',
+        indicatorId: 'id__1',
+      }, {
+        indicatorName: 'KP102',
+        indicatorIntro: '介绍',
+        indicatorType: '复合指标',
+        dataSource: 'MySQL',
+        indicatorStatus: '有效',
+        underBiz: '业务B',
+        createdBy: 'wyh',
+        createdAt: '1520995254713',
+        indicatorVersion: 'V1',
+        indicatorId: 'id__2',
+      }, {
+        indicatorName: 'KP101',
+        indicatorIntro: '介绍',
+        indicatorType: '普通指标',
+        dataSource: 'MySQL',
+        indicatorStatus: '有效',
+        underBiz: '业务C',
+        createdBy: 'wyh',
+        createdAt: '1520938254713',
+        indicatorVersion: 'V1',
+        indicatorId: 'id__3',
+      }, ...getList(120)],
     },
     r_err: {
       ok: false,

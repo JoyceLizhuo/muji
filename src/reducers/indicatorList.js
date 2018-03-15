@@ -15,4 +15,11 @@ export default handleActions({
     ...state,
     ...payload,
   }),
+  [types.indicatorDelete] (state, { payload: { deletedIndicatorId } }) {
+    const { indicatorList } = state
+    return {
+      ...state,
+      indicatorList: indicatorList.filter(({ indicatorId }) => (indicatorId !== deletedIndicatorId))
+    }
+  },
 }, defaultState)

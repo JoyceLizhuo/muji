@@ -5,7 +5,7 @@ import { createAction } from 'redux-actions'
 import types from '../../util/actionTypes'
 import './IndicatorSummary.css'
 import Layout from '../../components/MainPageLayout/MainPageLayout'
-import getAllIndicators from '../../service/getAllIndicators'
+import { getAllIndicators } from '../../service/IndicatorOperate'
 
 import Search from './components/Search'
 import IndicatorAdd from './components/IndicatorAdd'

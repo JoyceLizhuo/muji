@@ -21,6 +21,9 @@ app.all(api.validate, require('./validate/validate'))
 // 获取指标
 app.all(api.getIndicator, require('./mainPage/getIndicator'))
 
+// 删除指标
+app.all(api.deleteIndicator, require('./mainPage/deleteIndicator'))
+
 // 启动mock
 app.listen(PORT, () => {
   console.log(`mock server is listening on http://localhost:${PORT}`)

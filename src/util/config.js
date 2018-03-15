@@ -1,7 +1,6 @@
 /**
  * 通用配置
  */
-
 export default {
 
   // table分页的通用配置
