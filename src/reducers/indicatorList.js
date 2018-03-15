@@ -1,19 +1,18 @@
 /**
  * 指标列表
  */
+import { handleActions } from 'redux-actions'
+import types from '../util/actionTypes'
+
 const defaultState = {
   indicatorList: [],
   loading: false,
 }
 
-export default function (state = defaultState, { type, payload }) {
-  switch (type) {
-    case 'setState':
-      return {
-        ...state,
-        ...payload,
-      }
-    default:
-      return state
-  }
-}
+
+export default handleActions({
+  [types.setState]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
+}, defaultState)

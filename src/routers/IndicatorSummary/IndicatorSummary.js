@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { createAction } from 'redux-actions'
+import types from '../../util/actionTypes'
 import './IndicatorSummary.css'
 import Layout from '../../components/MainPageLayout/MainPageLayout'
 import getAllIndicators from '../../service/getAllIndicators'
@@ -41,30 +43,22 @@ function mapStateToProps () {
 }
 
 function mapDispatchToProps (dispatch) {
+  const setState = createAction(types.setState)
   return {
     async getIndicatorList () {
       try {
-        dispatch({
-          type   : 'setState',
-          payload: {
-            loading: true,
-          },
-        })
-        const { data: { data: indicatorList } } = await getAllIndicators()
-        dispatch({
-          type   : 'setState',
-          payload: {
-            indicatorList,
-            loading: false,
-          },
-        })
+        dispatch(setState({
+          loading: true,
+        }))
+        const { data: { data: indicatorList } } = await getAllIndicators() // 获取指标列表
+        dispatch(setState({
+          indicatorList,
+          loading: false,
+        }))
       } catch (e) {
-        dispatch({
-          type   : 'setState',
-          payload: {
-            loading: false,
-          },
-        })
+        dispatch(setState({
+          loading: false,
+        }))
       }
     }
   }
