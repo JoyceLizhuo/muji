@@ -4,4 +4,4 @@
 
 export { default as main } from './main'
 export { default as user } from './user'
-export { default as indicatorList } from './indicatorList'
+export { default as indicatorSummary } from './indicatorSummary'

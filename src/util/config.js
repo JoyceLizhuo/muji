@@ -1,7 +1,21 @@
 /**
  * 通用配置
  */
-export default {
+const config = {
+  indicatorType: {
+    basic: {
+      label: '基本指标',
+      value: 'basic',
+    },
+    normal: {
+      label: '普通指标',
+      value: 'normal',
+    },
+    compound: {
+      label: '复合指标',
+      value: 'compound',
+    },
+  },
 
   // table分页的通用配置
   pagination: {
@@ -13,3 +27,7 @@ export default {
     },
   }
 }
+
+config.indicatorTypeArray = Object.keys(config.indicatorType).map((key) => ({ label: config.indicatorType[key].label, value: config.indicatorType[key].value }))
+
+export default config

@@ -2,14 +2,15 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createAction } from 'redux-actions'
+import { Button, Modal } from 'antd'
 import types from '../../util/actionTypes'
 import './IndicatorSummary.css'
 import Layout from '../../components/MainPageLayout/MainPageLayout'
 import { getAllIndicators } from '../../service/IndicatorOperate'
 
 import Search from './components/Search'
-import IndicatorAdd from './components/IndicatorAdd'
 import IndicatorTable from './components/IndicatorTable'
+import IndicatorAddForm from './components/IndicatorAddForm'
 
 class IndicatorSummary extends PureComponent {
   componentDidMount () {
@@ -18,13 +19,43 @@ class IndicatorSummary extends PureComponent {
   }
 
   render () {
+    const { showModal, handleShowModal } = this.props
     return (
       <Layout className="indicator_summary">
         <div className="operate-wrap">
           <div className="left">
             <Search className="search" />
           </div>
-          <IndicatorAdd />
+          <div className="indicatorAdd">
+            <Button
+              onClick={handleShowModal}
+              type="primary"
+              icon="plus"
+            >
+              创建指标
+            </Button>
+            <Modal
+              title="添加指标"
+              visible={showModal}
+              footer={null}
+              width="70vw"
+              style={{
+                minWidth: '1000px',
+                maxWidth: '1400px',
+              }}
+            >
+              <IndicatorAddForm
+                defaultValue={ {
+                  indicatorName: 'KP_xxx',
+                  indicatorIntro: '说明',
+                  dataSource: 'Hive',
+                  indicatorSQL: 'asdfasdf',
+                  underBiz: '',
+                } }
+                onSuccess={(value) => { console.log('onSuccess: ', value) }}
+              />
+            </Modal>
+          </div>
         </div>
         <div className="table-wrap">
           <IndicatorTable />
@@ -36,10 +67,14 @@ class IndicatorSummary extends PureComponent {
 
 IndicatorSummary.propTypes = {
   getIndicatorList: PropTypes.func.isRequired,
+  handleShowModal: PropTypes.func.isRequired,
+  showModal: PropTypes.bool.isRequired,
 }
 
-function mapStateToProps () {
-  return {}
+function mapStateToProps ({ indicatorSummary: { showModal } }) {
+  return {
+    showModal,
+  }
 }
 
 function mapDispatchToProps (dispatch) {
@@ -60,7 +95,12 @@ function mapDispatchToProps (dispatch) {
           loading: false,
         }))
       }
-    }
+    },
+    handleShowModal () {
+      dispatch(setState({
+        showModal: true,
+      }))
+    },
   }
 }
 

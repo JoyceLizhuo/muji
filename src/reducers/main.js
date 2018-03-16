@@ -1,18 +1,18 @@
 /**
  * 通用的state
  */
+import { handleActions } from 'redux-actions'
+import types from '../util/actionTypes'
+
 const defaultState = {
   bizId: '', // 当前选中的业务的id
+  bizList: [], // 业务列表
+  dataSourceList: [], // 数据来源列表
 }
 
-export default function (state = defaultState, { type, payload }) {
-  switch (type) {
-    case 'setState':
-      return {
-        ...state,
-        ...payload,
-      }
-    default:
-      return state
-  }
-}
+export default handleActions({
+  [types.setState]: (state, { payload }) => ({
+    ...state,
+    ...payload,
+  }),
+}, defaultState)

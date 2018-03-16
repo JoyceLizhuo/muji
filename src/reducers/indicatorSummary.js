@@ -1,5 +1,5 @@
 /**
- * 指标列表
+ * 指标首页
  */
 import { handleActions } from 'redux-actions'
 import types from '../util/actionTypes'
@@ -7,6 +7,7 @@ import types from '../util/actionTypes'
 const defaultState = {
   indicatorList: [],
   loading: false,
+  showModal: false,
 }
 
 

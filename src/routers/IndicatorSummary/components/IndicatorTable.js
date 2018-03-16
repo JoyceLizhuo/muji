@@ -196,7 +196,7 @@ IndicatorTable.defaultProps = {
   className: '',
 }
 
-const mapStateToProps = ({ indicatorList: { indicatorList, loading } }) => {
+const mapStateToProps = ({ indicatorSummary: { indicatorList, loading } }) => {
   return {
     indicatorList,
     loading,

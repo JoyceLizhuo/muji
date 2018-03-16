@@ -16,6 +16,7 @@ function getList (num) {
       createdBy: 'wyh', // 创建者
       createdAt: `152099825471${i}`, // 创建日期的时间戳
       indicatorVersion: 'V1', // 指标版本
+      indicatorSQL: 'select * from table xxxxxxx', // 指标SQL
       indicatorId: `id_${i}`,
     })
   }
