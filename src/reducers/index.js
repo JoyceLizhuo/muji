@@ -5,3 +5,4 @@
 export { default as main } from './main'
 export { default as user } from './user'
 export { default as indicatorSummary } from './indicatorSummary'
+export { default as indicatorDetail } from './indicatorDetail'

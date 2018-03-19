@@ -1,14 +1,19 @@
+/**
+ * todo table中的日期filter做成日历范围选择器
+ */
+
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { Table, Menu, Dropdown, Icon, Popconfirm } from 'antd'
+import { withRouter, Link } from 'react-router-dom'
+import { Table, Menu, Dropdown, Icon, Popconfirm, message } from 'antd'
 import { createAction } from 'redux-actions'
 import types from '../../../util/actionTypes'
 import config from '../../../util/config'
 import dateFormat from '../../../util/methods/dateFormat'
 import { deleteIndicator } from '../../../service/IndicatorOperate'
 import './IndicatorTable.css'
+import routerPath from '../../../util/routerPath'
 
 class IndicatorTable extends PureComponent {
   constructor (props) {
@@ -51,7 +56,7 @@ class IndicatorTable extends PureComponent {
         <Menu.Item>
           <Popconfirm
             title={(<p>确定删除 <span className="bold">{indicatorName}</span>？</p>)}
-            onConfirm={() => { handleDeleteIndicator(indicatorId) }}
+            onConfirm={() => { handleDeleteIndicator(indicatorId, indicatorName) }}
             onCancel={() => {}}
             okText="Yes"
             cancelText="No"
@@ -68,79 +73,48 @@ class IndicatorTable extends PureComponent {
   // 生成table的column
   getColumns () {
     const that = this
-    const columns = [{
-      title: '指标名称',
-      dataIndex: 'indicatorName',
-      key: 'indicatorName',
-      sorter: (a, b) => (a.indicatorName > b.indicatorName ? 1 : -1),
-    }, {
-      title: '指标说明',
-      dataIndex: 'indicatorIntro',
-      key: 'indicatorIntro',
-    }, {
-      title: '指标类型',
-      dataIndex: 'indicatorType',
-      key: 'indicatorType',
-      filters: this.getFilterList('indicatorType'),
-      onFilter (value, { indicatorType }) {
-        return value === indicatorType
-      },
-    }, {
-      title: '数据来源',
-      dataIndex: 'dataSource',
-      key: 'dataSource',
-      filters: this.getFilterList('dataSource'),
-      onFilter (value, { dataSource }) {
-        return value === dataSource
-      },
-    }, {
-      title: '指标状态',
-      dataIndex: 'indicatorStatus',
-      key: 'indicatorStatus',
-      filters: this.getFilterList('indicatorStatus'),
-      onFilter (value, { indicatorStatus }) {
-        return value === indicatorStatus
-      },
-    }, {
-      title: '所属业务',
-      dataIndex: 'underBiz',
-      key: 'underBiz',
-      filters: this.getFilterList('underBiz'),
-      onFilter (value, { underBiz }) {
-        return value === underBiz
-      },
-    }, {
-      title: '创建者',
-      dataIndex: 'createdBy',
-      key: 'createdBy',
-    }, {
-      title: '创建日期',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
-      filters: this.getFilterList('createdAt'),
-      onFilter (value, { createdAt }) {
-        return value === createdAt
-      },
-      sorter: (a, b) => (+a.createdAt > +b.createdAt ? 1 : -1),
-      render (text) {
-        return (
-          <span>
-            {dateFormat(text)}
-          </span>
-        )
-      },
-    }, {
-      title: '指标版本',
-      dataIndex: 'indicatorVersion',
-      key: 'indicatorVersion',
-    }, {
+    const columns = config.indicatorTableColumns.map((item) => {
+      const { dataIndex } = item
+      const r = {
+        ...item,
+      }
+      switch (dataIndex) {
+        case 'indicatorName':
+          r.sorter = (a, b) => (a.indicatorName > b.indicatorName ? 1 : -1)
+          break
+        case 'indicatorType':
+          r.filters = this.getFilterList('indicatorType')
+          r.onFilter = (value, { indicatorType }) => (value === indicatorType)
+          break
+        case 'dataSource':
+          r.filters = this.getFilterList('dataSource')
+          r.onFilter = (value, { dataSource }) => (value === dataSource)
+          break
+        case 'indicatorStatus':
+          r.filters = this.getFilterList('indicatorStatus')
+          r.onFilter = (value, { indicatorStatus }) => (value === indicatorStatus)
+          break
+        case 'underBiz':
+          r.filters = this.getFilterList('underBiz')
+          r.onFilter = (value, { underBiz }) => (value === underBiz)
+          break
+        case 'createdAt':
+          r.filters = this.getFilterList('createdAt')
+          r.onFilter = (value, { createdAt }) => (value === createdAt)
+          r.sorter = (a, b) => (+a.createdAt > +b.createdAt ? 1 : -1)
+          break
+        default:
+      }
+      return r
+    })
+    columns.push({
       title: '指标操作',
       dataIndex: 'edit',
       key: 'edit',
       render (text, record) {
         return (
           <div className="link">
-            <span>查看</span>
+            <Link to={`${routerPath.detail}/${record.indicatorId}`}>查看</Link>
             <Dropdown
               placement="bottomCenter"
               overlay={that.getEditMenu(record)}
@@ -152,7 +126,7 @@ class IndicatorTable extends PureComponent {
           </div>
         )
       }
-    }]
+    })
     return columns
   }
   render () {
@@ -206,15 +180,16 @@ const mapStateToProps = ({ indicatorSummary: { indicatorList, loading } }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // 删除一条指标
-    async handleDeleteIndicator (indicatorId) {
-      const deleteAction = createAction(types.indicatorDelete)
+    async handleDeleteIndicator (indicatorId, indicatorName) {
+      const deleteAction = createAction(types.indicatorSummary_indicatorDelete)
       try {
         await deleteIndicator({ indicatorId })
         dispatch(deleteAction({
           deletedIndicatorId: indicatorId,
         }))
+        message.success(`成功删除指标：${indicatorName}`)
       } catch (e) {
-        console.log('删除指标失败：', indicatorId)
+        console.log('删除指标失败：', indicatorId, indicatorName)
       }
     }
   }

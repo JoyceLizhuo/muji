@@ -19,7 +19,7 @@ class IndicatorSummary extends PureComponent {
   }
 
   render () {
-    const { showModal, handleShowModal } = this.props
+    const { showModal, handleShowModal, handleCancleModal } = this.props
     return (
       <Layout className="indicator_summary">
         <div className="operate-wrap">
@@ -37,6 +37,7 @@ class IndicatorSummary extends PureComponent {
             <Modal
               title="添加指标"
               visible={showModal}
+              onCancel={handleCancleModal}
               footer={null}
               width="70vw"
               style={{
@@ -68,6 +69,7 @@ class IndicatorSummary extends PureComponent {
 IndicatorSummary.propTypes = {
   getIndicatorList: PropTypes.func.isRequired,
   handleShowModal: PropTypes.func.isRequired,
+  handleCancleModal: PropTypes.func.isRequired,
   showModal: PropTypes.bool.isRequired,
 }
 
@@ -78,7 +80,7 @@ function mapStateToProps ({ indicatorSummary: { showModal } }) {
 }
 
 function mapDispatchToProps (dispatch) {
-  const setState = createAction(types.setState)
+  const setState = createAction(types.indicatorSummary_setState)
   return {
     async getIndicatorList () {
       try {
@@ -99,6 +101,11 @@ function mapDispatchToProps (dispatch) {
     handleShowModal () {
       dispatch(setState({
         showModal: true,
+      }))
+    },
+    handleCancleModal () {
+      dispatch(setState({
+        showModal: false,
       }))
     },
   }

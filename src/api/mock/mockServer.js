@@ -24,6 +24,9 @@ app.all(api.getIndicator, require('./mainPage/getIndicator'))
 // 删除指标
 app.all(api.deleteIndicator, require('./mainPage/deleteIndicator'))
 
+// 获取指标详情
+app.all(`${api.indicatorDetailData}/:indicatorId`, require('./detailPage/indicatorDetailData'))
+
 // 启动mock
 app.listen(PORT, () => {
   console.log(`mock server is listening on http://localhost:${PORT}`)

@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Dropdown, Icon, Menu } from 'antd'
@@ -36,7 +35,7 @@ class UserPage extends PureComponent {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps () {
   return {
     foo: 'foo'
   }

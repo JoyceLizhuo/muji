@@ -3,6 +3,9 @@
  */
 
 export default {
-  setState: 'setState',
-  indicatorDelete: 'indicatorDelete', // 删除一条指标
+  user_setState: 'user/setState',
+  main_setState: 'main/setState',
+  indicatorSummary_setState: 'indicatorSummary/setState',
+  indicatorSummary_indicatorDelete: 'indicatorDelete', // 删除一条指标
+  indicatorDetail_setState: 'indicatorDetail/setState',
 }

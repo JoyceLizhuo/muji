@@ -11,7 +11,7 @@ const defaultState = {
 }
 
 export default handleActions({
-  [types.setState]: (state, { payload }) => ({
+  [types.main_setState]: (state, { payload }) => ({
     ...state,
     ...payload,
   }),

@@ -1,3 +1,7 @@
+/**
+ * todo 菜单跟产品决定
+ */
+
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -9,9 +13,6 @@ import './NavHeader.css'
 const { SubMenu, ItemGroup: MenuItemGroup } = Menu
 
 class NavHeader extends PureComponent {
-  constructor (props) {
-    super(props)
-  }
   render () {
     const { className } = this.props
     return (

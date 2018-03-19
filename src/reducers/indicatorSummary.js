@@ -12,11 +12,11 @@ const defaultState = {
 
 
 export default handleActions({
-  [types.setState]: (state, { payload }) => ({
+  [types.indicatorSummary_setState]: (state, { payload }) => ({
     ...state,
     ...payload,
   }),
-  [types.indicatorDelete] (state, { payload: { deletedIndicatorId } }) {
+  [types.indicatorSummary_indicatorDelete] (state, { payload: { deletedIndicatorId } }) {
     const { indicatorList } = state
     return {
       ...state,

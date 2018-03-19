@@ -1,0 +1,19 @@
+.login-page {
+  width: var(--fullWidth);
+  margin: 0 auto;
+  height: 100vh;
+  min-width: 1200px;
+  min-height: 300px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  & > .login-page-title {
+    text-align: center;
+  }
+
+  & > .login-page-form-wrap {
+    width: 360px;
+  }
+}

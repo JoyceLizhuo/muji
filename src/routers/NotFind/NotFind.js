@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 class Home extends PureComponent {
@@ -12,7 +11,7 @@ class Home extends PureComponent {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps () {
   return {
     foo: 'foo'
   }

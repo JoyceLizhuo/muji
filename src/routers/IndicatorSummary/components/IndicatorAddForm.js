@@ -22,7 +22,6 @@ const formItemLayout = {
 class IndicatorAdd extends PureComponent {
   constructor (props) {
     super(props)
-    console.log('form: ', this.props.form)
     this.check = this.check.bind(this)
     this.handleDataSourceChange = this.handleDataSourceChange.bind(this)
     this.handleIndicatorNameChange = this.handleIndicatorNameChange.bind(this)
@@ -205,19 +204,27 @@ class IndicatorAdd extends PureComponent {
 
 IndicatorAdd.propTypes = {
   className: PropTypes.string,
+
+  // 表单的默认值
   defaultValue: PropTypes.shape({
     indicatorName: PropTypes.string,
     indicatorIntro: PropTypes.string,
     dataSource: PropTypes.string,
     indicatorSQL: PropTypes.string,
   }),
+
+  // 业务列表，connect传入
   bizList: PropTypes.arrayOf(PropTypes.shape({
     bizId: PropTypes.string,
     bizName: PropTypes.string,
   })).isRequired,
+
+  // 数据来源，connect传入
   dataSourceList: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string,
   })).isRequired,
+
+  // 点击"提交"且验证成功之后的回调，参数：表单内容的JSON
   onSuccess: PropTypes.func.isRequired,
 }
 

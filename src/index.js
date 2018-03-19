@@ -10,10 +10,13 @@ import './index.css'
 import registerServiceWorker from './registerServiceWorker'
 import * as reducers from './reducers/index'
 import axios from './service/axios'
+import types from "./util/actionTypes"
+import routerPath from './util/routerPath'
 import NotFind from './routers/NotFind/NotFind'
 import Help from './routers/Help/Help'
 import IndicatorSummary from "./routers/IndicatorSummary/IndicatorSummary"
-import types from "./util/actionTypes"
+import LoginPage from "./routers/Login/LoginPage"
+import DetailPage from './routers/DetailPage/DetailPage'
 
 const api = require('./api/config')
 
@@ -51,9 +54,11 @@ axios({
       <Provider store={store}>
         <Router>
           <Switch>
-            <Redirect exact from="/" to="/page/summary" />
-            <Route exact path="/help" component={Help} />
-            <Route exact path="/page/summary" component={IndicatorSummary} />
+            <Redirect exact from="/" to={routerPath.summary} />
+            <Route exact path={routerPath.help} component={Help} />
+            <Route exact path={routerPath.login} component={LoginPage} />
+            <Route exact path={routerPath.summary} component={IndicatorSummary} />
+            <Route exact path={`${routerPath.detail}/:detailId`} component={DetailPage} />
             <Route component={NotFind} />
           </Switch>
         </Router>
@@ -61,7 +66,7 @@ axios({
     ), document.getElementById('root'))
 
     // 将鉴权返回的用户初始信息填入
-    const setState = createAction(types.setState)
+    const setState = createAction(types.main_setState)
     const { data: { data: {
       bizList, // 业务列表
       dataSourceList, // 数据源列表

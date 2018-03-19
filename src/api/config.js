@@ -17,4 +17,5 @@ module.exports = {
   validate    : `${localPrefix}/validate`,
   getIndicator: `${localPrefix}/getIndicator`, // 获取指标列表
   deleteIndicator: `${localPrefix}/deleteIndicator`, // 获取指标列表
+  indicatorDetailData: `${localPrefix}/indicatorDetailData`,
 }
