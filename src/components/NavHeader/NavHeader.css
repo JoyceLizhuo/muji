@@ -6,8 +6,16 @@
   width: 100%;
 
   & > .main_page-nav {
+    height: var(--mainPageNavHeight);
     display: flex;
     flex-basis: 100%;
+
+    & > .site_name {
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+    }
 
     & > .main_page-nav-list {
       border-bottom: 0;

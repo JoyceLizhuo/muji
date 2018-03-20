@@ -8,6 +8,7 @@ import types from '../../util/actionTypes'
 import getIndicatorDetailData from '../../service/getIndicatorDetailData'
 import ChartDetail from './components/ChartDetail'
 import config from '../../util/config'
+import Layout from '../../components/MainPageLayout/MainPageLayout'
 
 class DetailPage extends PureComponent {
   componentDidMount () {
@@ -60,7 +61,7 @@ class DetailPage extends PureComponent {
       )
     }
     return (
-      <div className="detail-page">
+      <Layout className="detail-page">
         <Spin spinning={loading}>
           <div className="detail-page-base-wrap">
             {baseInfo}
@@ -69,7 +70,7 @@ class DetailPage extends PureComponent {
             {chartResult}
           </div>
         </Spin>
-      </div>
+      </Layout>
     )
   }
 }

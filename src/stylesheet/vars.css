@@ -2,7 +2,8 @@
 :root {
   --mainPageNavHeight: 48px; /* mainPage的导航条的高度 */
   --fullWidth: calc(100vw - 60px); /* 宽度沾满屏幕时的宽度，60px：两边留白。直接用100vw时会将竖直滚动条算入，导致宽度超过body而出现水平滚动条 */
-  --bodyPadding: 30px; // 页面两边留白的距离
+  --bodyPadding: 30px; /* 页面两边留白的距离 */
+  --gapBetweenMod: 30px; /* 两个模块之间的间距 */
 
   /**
    * 颜色

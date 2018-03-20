@@ -1,16 +1,30 @@
 .detail-page {
-  padding: var(--bodyPadding);
-
-  & .detail-page-base-wrap {
-
-  }
+  /* 指标的基本信息 */
+  & .detail-page-base-wrap {}
 
   & .detail-page-result-wrap {
 
-    /* 图表 */
+    /* 详情 */
     & .chart_result {
+      margin-top: var(--gapBetweenMod);
       width: 100%;
       height: 400px;
+
+      /* 非图表详情 */
+      &.chart_result-value {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        font-weight: bold;
+        color: #999;
+
+        & > .label {
+          font-size: 18px;
+        }
+        & > .value {
+          color: #333;
+        }
+      }
     }
   }
 }
