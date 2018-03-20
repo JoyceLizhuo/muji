@@ -1,0 +1,5 @@
+.search {
+  & .ant-input-suffix {
+    right: 1px; /* antd bug? 不添加此行搜索按钮位置会偏左11px*/
+  }
+}

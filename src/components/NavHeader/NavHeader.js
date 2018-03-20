@@ -6,11 +6,11 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { Menu, Icon } from 'antd'
+// import { Menu, Icon } from 'antd'
 import UserButton from '../UserButton/UserButton'
 import './NavHeader.css'
 
-const { SubMenu, ItemGroup: MenuItemGroup } = Menu
+// const { SubMenu, ItemGroup: MenuItemGroup } = Menu
 
 class NavHeader extends PureComponent {
   render () {

@@ -4,10 +4,12 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import { Form, Input, Select, Radio, Button } from 'antd'
+import { withRouter, Link } from 'react-router-dom'
+import { Form, Input, Select, Radio, Button, Table } from 'antd'
 import './IndicatorAddForm.css'
 import config from '../../../util/config'
+import Search from './Search'
+import routerPath from "../../../util/routerPath";
 
 const { Item: FormItem } = Form
 const { Group: RadioGroup } = Radio
@@ -22,6 +24,9 @@ const formItemLayout = {
 class IndicatorAdd extends PureComponent {
   constructor (props) {
     super(props)
+    this.state = {
+      searchedValue: '',
+    }
     this.check = this.check.bind(this)
     this.handleDataSourceChange = this.handleDataSourceChange.bind(this)
     this.handleIndicatorNameChange = this.handleIndicatorNameChange.bind(this)
@@ -29,6 +34,13 @@ class IndicatorAdd extends PureComponent {
     this.handleIndicatorTypeChange = this.handleIndicatorTypeChange.bind(this)
     this.handleUnderBizChange = this.handleUnderBizChange.bind(this)
     this.handleIndicatorSQLChange = this.handleIndicatorSQLChange.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
+  }
+
+  handleSearch (searchedValue) {
+    this.setState({
+      searchedValue,
+    })
   }
 
   // 检查表单
@@ -88,6 +100,7 @@ class IndicatorAdd extends PureComponent {
       className,
       bizList,
       dataSourceList,
+      indicatorList,
       defaultValue: {
         indicatorName,
         indicatorIntro,
@@ -97,6 +110,35 @@ class IndicatorAdd extends PureComponent {
         indicatorSQL,
       },
     } = this.props
+    const columns = [{
+      title: '指标名称',
+      dataIndex: 'indicatorName',
+      key: 'indicatorName',
+    }, {
+      title: '指标说明',
+      dataIndex: 'indicatorIntro',
+      key: 'indicatorIntro',
+    }, {
+      title: '所属业务',
+      dataIndex: 'underBiz',
+      key: 'underBiz',
+    }, {
+      title: '创建者',
+      dataIndex: 'createdBy',
+      key: 'createdBy',
+    }, {
+      title: '指标操作',
+      dataIndex: 'edit',
+      key: 'edit',
+      render (text, record) {
+        return (
+          <div className="link alignCenter">
+            <Link to={`${routerPath.detail}/${record.indicatorId}`} target="_blank">查看</Link>
+          </div>
+        )
+      }
+    }]
+    const tableDatasource = indicatorList.filter(({ indicatorName }) => (indicatorName.toLowerCase().includes(this.state.searchedValue.toLowerCase())))
     return (
       <div className={`${className} indicatorAddForm`}>
         <div className="indicatorAddForm-form_wrap">
@@ -195,7 +237,17 @@ class IndicatorAdd extends PureComponent {
           </div>
         </div>
         <div className="indicatorAddForm-indicators_table">
-          table
+          <Search className="search" onSearch={this.handleSearch} />
+          <Table
+            bordered
+            rowKey="indicatorId"
+            dataSource={tableDatasource}
+            columns={columns}
+            pagination={{
+              ...config.pagination,
+              pageSize: 10,
+            }}
+          />
         </div>
       </div>
     )
@@ -204,6 +256,8 @@ class IndicatorAdd extends PureComponent {
 
 IndicatorAdd.propTypes = {
   className: PropTypes.string,
+
+  indicatorList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 
   // 表单的默认值
   defaultValue: PropTypes.shape({
@@ -238,10 +292,11 @@ IndicatorAdd.defaultProps = {
   },
 }
 
-function mapStateToProps ({ main: { dataSourceList, indicatorTypeList, bizList } }) {
+function mapStateToProps ({ main: { dataSourceList, indicatorTypeList, bizList }, indicatorSummary: { indicatorList } }) {
   return {
     bizList,
     dataSourceList,
+    indicatorList,
   }
 }
 

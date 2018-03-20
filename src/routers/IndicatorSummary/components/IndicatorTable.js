@@ -26,7 +26,7 @@ class IndicatorTable extends PureComponent {
   // 生成table的filter菜单
   getFilterList (name) {
     const r = []
-    this.props.indicatorList.forEach((item) => {
+    this.props.datasource.forEach((item) => {
       const itemValue = item[name]
       if (!r.find(({ value }) => ( value === itemValue ))) {
         const filterItem = {
@@ -130,7 +130,7 @@ class IndicatorTable extends PureComponent {
     return columns
   }
   render () {
-    const { className, indicatorList, loading } = this.props
+    const { className, datasource, loading } = this.props
     return (
       <div className={`${className} indicatorTable-wrap`}>
         <Table
@@ -138,8 +138,8 @@ class IndicatorTable extends PureComponent {
           className="indicatorTable-table"
           bordered
           rowKey="indicatorId"
-          dataSource={indicatorList}
-          columns={this.getColumns(indicatorList)}
+          dataSource={datasource}
+          columns={this.getColumns(datasource)}
           pagination={config.pagination}
         />
       </div>
@@ -153,7 +153,7 @@ IndicatorTable.propTypes = {
   handleDeleteIndicator: PropTypes.func.isRequired,
 
   // table的dataSource
-  indicatorList: PropTypes.arrayOf(PropTypes.shape({
+  datasource: PropTypes.arrayOf(PropTypes.shape({
     indicatorName: PropTypes.string, // 指标名称
     indicatorIntro: PropTypes.string, // 指标说明
     indicatorType: PropTypes.string, // 指标类型
@@ -170,9 +170,8 @@ IndicatorTable.defaultProps = {
   className: '',
 }
 
-const mapStateToProps = ({ indicatorSummary: { indicatorList, loading } }) => {
+const mapStateToProps = ({ indicatorSummary: { loading } }) => {
   return {
-    indicatorList,
     loading,
   }
 }

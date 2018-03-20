@@ -13,18 +13,32 @@ import IndicatorTable from './components/IndicatorTable'
 import IndicatorAddForm from './components/IndicatorAddForm'
 
 class IndicatorSummary extends PureComponent {
+  constructor (props) {
+    super(props)
+    this.state = {
+      searchedValue: '',
+    }
+    this.handleSearch = this.handleSearch.bind(this)
+  }
   componentDidMount () {
     // 获取所有的指标
     this.props.getIndicatorList()
   }
 
+  handleSearch (searchedValue) {
+    this.setState({
+      searchedValue,
+    })
+  }
+
   render () {
-    const { showModal, handleShowModal, handleCancleModal } = this.props
+    const { showModal, handleShowModal, handleCancleModal, indicatorList } = this.props
+    const tableDatasource = indicatorList.filter(({ indicatorName }) => (indicatorName.toLowerCase().includes(this.state.searchedValue.toLowerCase())))
     return (
       <Layout className="indicator_summary">
         <div className="operate-wrap">
           <div className="left">
-            <Search className="search" />
+            <Search className="search" onSearch={this.handleSearch} />
           </div>
           <div className="indicatorAdd">
             <Button
@@ -59,7 +73,7 @@ class IndicatorSummary extends PureComponent {
           </div>
         </div>
         <div className="table-wrap">
-          <IndicatorTable />
+          <IndicatorTable datasource={tableDatasource} />
         </div>
       </Layout>
     )
@@ -71,11 +85,13 @@ IndicatorSummary.propTypes = {
   handleShowModal: PropTypes.func.isRequired,
   handleCancleModal: PropTypes.func.isRequired,
   showModal: PropTypes.bool.isRequired,
+  indicatorList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 }
 
-function mapStateToProps ({ indicatorSummary: { showModal } }) {
+function mapStateToProps ({ indicatorSummary: { showModal, indicatorList } }) {
   return {
     showModal,
+    indicatorList,
   }
 }
 

@@ -8,6 +8,8 @@
   }
 
   & > .indicatorAddForm-indicators_table {
-
+    & > .search {
+      margin-bottom: 10px;
+    }
   }
 }
