@@ -9,7 +9,7 @@ import { Form, Input, Select, Radio, Button, Table } from 'antd'
 import './IndicatorAddForm.css'
 import config from '../../../util/config'
 import Search from './Search'
-import routerPath from "../../../util/routerPath";
+import routerPath from "../../../util/routerPath"
 
 const { Item: FormItem } = Form
 const { Group: RadioGroup } = Radio
@@ -28,6 +28,7 @@ class IndicatorAdd extends PureComponent {
       searchedValue: '',
     }
     this.check = this.check.bind(this)
+    this.reset = this.reset.bind(this)
     this.handleDataSourceChange = this.handleDataSourceChange.bind(this)
     this.handleIndicatorNameChange = this.handleIndicatorNameChange.bind(this)
     this.handleIndicatorIntroChange = this.handleIndicatorIntroChange.bind(this)
@@ -43,6 +44,10 @@ class IndicatorAdd extends PureComponent {
     })
   }
 
+  reset () {
+    this.props.form.resetFields()
+  }
+
   // 检查表单
   check () {
     const { validateFieldsAndScroll, getFieldsValue } = this.props.form
@@ -52,7 +57,7 @@ class IndicatorAdd extends PureComponent {
           this.props.onSuccess(getFieldsValue())
         }
       },
-    );
+    )
   }
 
   handleIndicatorNameChange (value) {
@@ -172,7 +177,7 @@ class IndicatorAdd extends PureComponent {
           </FormItem>
           <FormItem {...formItemLayout} label="指标类型">
             {getFieldDecorator('indicatorType', {
-              initialValue: indicatorType,
+              initialValue: indicatorType || config.indicatorTypeArray[0].value,
               rules: [{
                 required: true,
                 message: '请输入指标类型',
@@ -233,6 +238,9 @@ class IndicatorAdd extends PureComponent {
           <div className="alignCenter">
             <Button type="primary" onClick={this.check}>
               提交
+            </Button>
+            <Button className="ml8" onClick={this.reset}>
+              重置
             </Button>
           </div>
         </div>

@@ -4,22 +4,23 @@ import dateFormat from "./methods/dateFormat";
 /**
  * 通用配置
  */
+const indicatorType = {
+  basic: {
+    label: '基本指标',
+    value: 'basic',
+  },
+  normal: {
+    label: '普通指标',
+    value: 'normal',
+  },
+  compound: {
+    label: '复合指标',
+    value: 'compound',
+  },
+}
 const config = {
   // 指标类型
-  indicatorType: {
-    basic: {
-      label: '基本指标',
-      value: 'basic',
-    },
-    normal: {
-      label: '普通指标',
-      value: 'normal',
-    },
-    compound: {
-      label: '复合指标',
-      value: 'compound',
-    },
-  },
+  indicatorType,
 
   // 指标信息table的columns
   indicatorTableColumns: [{
@@ -34,6 +35,14 @@ const config = {
     title: '指标类型',
     dataIndex: 'indicatorType',
     key: 'indicatorType',
+    render (text) {
+      const indicatorTypeItem = Object.values(indicatorType).filter(({ value }) => (value === text))[0]
+      let r = ''
+      if (indicatorTypeItem) {
+        r = indicatorTypeItem.label
+      }
+      return r
+    },
   }, {
     title: '数据来源',
     dataIndex: 'dataSource',

@@ -3,9 +3,7 @@
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: 30px;
 
-  & > .indicatorAddForm-form_wrap {
-
-  }
+  & > .indicatorAddForm-form_wrap {}
 
   & > .indicatorAddForm-indicators_table {
     & > .search {

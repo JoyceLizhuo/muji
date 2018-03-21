@@ -7,7 +7,12 @@ import types from '../util/actionTypes'
 const defaultState = {
   indicatorList: [], // 一次性加载的所有指标的列表
   loading: false,
-  showModal: false,
+  showAddModal: false,
+
+  showEditModal: false,
+
+  // 当前修改的那一条的数据
+  edittingRecord: {},
 }
 
 

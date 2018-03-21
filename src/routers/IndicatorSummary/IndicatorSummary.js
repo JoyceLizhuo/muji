@@ -2,11 +2,11 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createAction } from 'redux-actions'
-import { Button, Modal } from 'antd'
+import { Button, Modal, message } from 'antd'
 import types from '../../util/actionTypes'
 import './IndicatorSummary.css'
 import Layout from '../../components/MainPageLayout/MainPageLayout'
-import { getAllIndicators } from '../../service/IndicatorOperate'
+import { getAllIndicators, addIndicator } from '../../service/indicatorCURD'
 
 import Search from './components/Search'
 import IndicatorTable from './components/IndicatorTable'
@@ -32,7 +32,7 @@ class IndicatorSummary extends PureComponent {
   }
 
   render () {
-    const { showModal, handleShowModal, handleCancleModal, indicatorList } = this.props
+    const { showAddModal, handleCancleModal, indicatorList, handleAdd, handleShowAddModal } = this.props
     const tableDatasource = indicatorList.filter(({ indicatorName }) => (indicatorName.toLowerCase().includes(this.state.searchedValue.toLowerCase())))
     return (
       <Layout className="indicator_summary">
@@ -42,7 +42,7 @@ class IndicatorSummary extends PureComponent {
           </div>
           <div className="indicatorAdd">
             <Button
-              onClick={handleShowModal}
+              onClick={handleShowAddModal}
               type="primary"
               icon="plus"
             >
@@ -50,7 +50,7 @@ class IndicatorSummary extends PureComponent {
             </Button>
             <Modal
               title="添加指标"
-              visible={showModal}
+              visible={showAddModal}
               onCancel={handleCancleModal}
               footer={null}
               width="70vw"
@@ -60,14 +60,7 @@ class IndicatorSummary extends PureComponent {
               }}
             >
               <IndicatorAddForm
-                defaultValue={ {
-                  indicatorName: 'KP_xxx',
-                  indicatorIntro: '说明',
-                  dataSource: 'Hive',
-                  indicatorSQL: 'asdfasdf',
-                  underBiz: '',
-                } }
-                onSuccess={(value) => { console.log('onSuccess: ', value) }}
+                onSuccess={handleAdd}
               />
             </Modal>
           </div>
@@ -82,15 +75,22 @@ class IndicatorSummary extends PureComponent {
 
 IndicatorSummary.propTypes = {
   getIndicatorList: PropTypes.func.isRequired,
-  handleShowModal: PropTypes.func.isRequired,
+  handleShowAddModal: PropTypes.func.isRequired,
   handleCancleModal: PropTypes.func.isRequired,
-  showModal: PropTypes.bool.isRequired,
+  handleAdd: PropTypes.func.isRequired,
+  showAddModal: PropTypes.bool.isRequired,
   indicatorList: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  defaultFormValue: PropTypes.shape({
+    indicatorName: PropTypes.string,
+    indicatorIntro: PropTypes.string,
+    dataSource: PropTypes.string,
+    indicatorSQL: PropTypes.string,
+  })
 }
 
-function mapStateToProps ({ indicatorSummary: { showModal, indicatorList } }) {
+function mapStateToProps ({ indicatorSummary: { showAddModal, indicatorList } }) {
   return {
-    showModal,
+    showAddModal,
     indicatorList,
   }
 }
@@ -114,14 +114,30 @@ function mapDispatchToProps (dispatch) {
         }))
       }
     },
-    handleShowModal () {
+
+    // 新增一条指标
+    async handleAdd (formData) {
+      try {
+        await addIndicator({
+          data: formData
+        })
+        message.success('添加指标成功')
+        dispatch(setState({
+          showAddModal: false,
+        }))
+      } catch (e) {
+        console.log('新增指标接口出错', e)
+        message.error('新增指失败')
+      }
+    },
+    handleShowAddModal () {
       dispatch(setState({
-        showModal: true,
+        showAddModal: true,
       }))
     },
     handleCancleModal () {
       dispatch(setState({
-        showModal: false,
+        showAddModal: false,
       }))
     },
   }

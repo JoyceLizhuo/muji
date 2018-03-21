@@ -24,7 +24,7 @@ module.exports = (req, res) => {
         }],
         // 数据来源列表
         dataSourceList: [{
-          name: 'mySQL'
+          name: 'MySQL'
         }, {
           name: 'Hive',
         }]

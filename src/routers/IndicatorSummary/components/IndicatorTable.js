@@ -6,14 +6,15 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { Table, Menu, Dropdown, Icon, Popconfirm, message } from 'antd'
+import { Table, Menu, Dropdown, Icon, Popconfirm, message, Modal } from 'antd'
 import { createAction } from 'redux-actions'
 import types from '../../../util/actionTypes'
 import config from '../../../util/config'
 import dateFormat from '../../../util/methods/dateFormat'
-import { deleteIndicator } from '../../../service/IndicatorOperate'
+import { deleteIndicator, modifyIndicator } from '../../../service/indicatorCURD'
 import './IndicatorTable.css'
 import routerPath from '../../../util/routerPath'
+import IndicatorAddForm from './IndicatorAddForm'
 
 class IndicatorTable extends PureComponent {
   constructor (props) {
@@ -43,12 +44,15 @@ class IndicatorTable extends PureComponent {
   }
 
   // 生成table的编辑菜单
-  getEditMenu ({ indicatorName, indicatorId }) {
-    const { handleDeleteIndicator } = this.props
+  getEditMenu (record) {
+    const { indicatorName, indicatorId } = record
+    const { handleDeleteIndicator, handleShowEditModal } = this.props
     return (
       <Menu>
         <Menu.Item>
-          <Icon type="edit" /> 修改
+          <div onClick={() => { handleShowEditModal(record) }}>
+            <Icon type="edit" /> 修改
+          </div>
         </Menu.Item>
         <Menu.Item>
           <Icon type="clock-circle-o" /> 查看历史记录
@@ -130,7 +134,10 @@ class IndicatorTable extends PureComponent {
     return columns
   }
   render () {
-    const { className, datasource, loading } = this.props
+    const { className, datasource, loading, showEditModal, handleCancleEditModal, handleSubmit, edittingRecord } = this.props
+    const defaultFormValue = {
+      ...edittingRecord,
+    }
     return (
       <div className={`${className} indicatorTable-wrap`}>
         <Table
@@ -142,6 +149,22 @@ class IndicatorTable extends PureComponent {
           columns={this.getColumns(datasource)}
           pagination={config.pagination}
         />
+        <Modal
+          title="修改指标"
+          visible={showEditModal}
+          onCancel={handleCancleEditModal}
+          footer={null}
+          width="70vw"
+          style={{
+            minWidth: '1000px',
+            maxWidth: '1400px',
+          }}
+        >
+          <IndicatorAddForm
+            defaultValue={defaultFormValue}
+            onSuccess={(formValue) => { handleSubmit(edittingRecord.indicatorId, formValue) }}
+          />
+        </Modal>
       </div>
     )
   }
@@ -150,7 +173,12 @@ class IndicatorTable extends PureComponent {
 IndicatorTable.propTypes = {
   className: PropTypes.string,
   loading: PropTypes.bool.isRequired,
+  showEditModal: PropTypes.bool.isRequired,
   handleDeleteIndicator: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleCancleEditModal: PropTypes.func.isRequired,
+  handleShowEditModal: PropTypes.func.isRequired,
+  edittingRecord: PropTypes.shape({}).isRequired,
 
   // table的dataSource
   datasource: PropTypes.arrayOf(PropTypes.shape({
@@ -170,14 +198,52 @@ IndicatorTable.defaultProps = {
   className: '',
 }
 
-const mapStateToProps = ({ indicatorSummary: { loading } }) => {
+const mapStateToProps = ({ indicatorSummary: { loading, showEditModal, edittingRecord } }) => {
   return {
     loading,
+    showEditModal,
+    edittingRecord,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
+  const setState = createAction(types.indicatorSummary_setState)
+
   return {
+    // 提交修改表单
+    async handleSubmit (indicatorId, formValue) {
+      try {
+        await modifyIndicator({
+          indicatorId,
+          data: formValue,
+        })
+        message.success('修改成功')
+        dispatch(setState({
+          showEditModal: false,
+        }))
+      } catch (e) {
+        console.log('修改指标失败', e)
+        message.error('修改指标失败')
+      }
+    },
+
+    // 打开修改弹窗
+    handleShowEditModal (record) {
+      dispatch(setState({
+        showEditModal: true,
+        edittingRecord: {
+          ...record,
+        },
+      }))
+    },
+
+    // 关闭修改弹窗
+    handleCancleEditModal () {
+      dispatch(setState({
+        showEditModal: false,
+      }))
+    },
+
     // 删除一条指标
     async handleDeleteIndicator (indicatorId, indicatorName) {
       const deleteAction = createAction(types.indicatorSummary_indicatorDelete)

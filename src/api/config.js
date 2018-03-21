@@ -13,9 +13,7 @@ if (process.env.NODE_ENV !== undefined && process.env.NODE_ENV !== 'development'
 }
 
 module.exports = {
-  login       : `${localPrefix}/login`,
-  validate    : `${localPrefix}/validate`,
-  getIndicator: `${localPrefix}/getIndicator`, // 获取指标列表
-  deleteIndicator: `${localPrefix}/deleteIndicator`, // 获取指标列表
-  indicatorDetailData: `${localPrefix}/indicatorDetailData`,
+  login       : `${localPrefix}/login`, // 登录
+  validate    : `${localPrefix}/validate`, // 鉴权
+  curdIndicator: `${localPrefix}/indicator`, // 增删改查
 }
