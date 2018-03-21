@@ -185,7 +185,7 @@ class IndicatorAdd extends PureComponent {
             })(
               <RadioGroup
                 options={ config.indicatorTypeArray }
-                onChange={this.handleDataSourceChange}
+                onChange={this.handleIndicatorTypeChange}
               />
             )}
           </FormItem>

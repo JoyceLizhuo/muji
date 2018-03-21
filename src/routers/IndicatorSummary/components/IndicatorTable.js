@@ -212,7 +212,7 @@ const mapDispatchToProps = (dispatch) => {
   const modifyAction = createAction(types.indicatorSummary_indicatorModify)
 
   return {
-    // 提交修改表单
+    // 提交修改表单 todo 判断重复
     async handleSubmit (indicatorId, formValue, edittingRecord) {
       try {
         const submitData = {

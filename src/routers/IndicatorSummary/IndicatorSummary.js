@@ -19,6 +19,7 @@ class IndicatorSummary extends PureComponent {
       searchedValue: '',
     }
     this.handleSearch = this.handleSearch.bind(this)
+    this.handleAdd = this.handleAdd.bind(this)
   }
   componentDidMount () {
     // 获取所有的指标
@@ -29,6 +30,24 @@ class IndicatorSummary extends PureComponent {
     this.setState({
       searchedValue,
     })
+  }
+
+  handleAdd (formData) {
+    // todo 判断重复做完善一些
+    const { indicatorName, indicatorSQL } = formData
+    const { indicatorList } = this.props
+    if (
+      indicatorList.find(({ indicatorName: indicatorNameInList }) => (indicatorNameInList === indicatorName))
+    ) {
+      message.error(`存在重名的指标: ${indicatorName}`)
+      return
+    } else if (
+      indicatorList.find(({ indicatorSQL: indicatorSQLInList }) => (indicatorSQLInList === indicatorSQL))
+    ) {
+      message.error(`存在重名的指标: ${indicatorSQL}`)
+      return
+    }
+    this.props.handleAdd(formData)
   }
 
   render () {
@@ -60,7 +79,7 @@ class IndicatorSummary extends PureComponent {
               }}
             >
               <IndicatorAddForm
-                onSuccess={handleAdd}
+                onSuccess={this.handleAdd}
               />
             </Modal>
           </div>
@@ -127,7 +146,6 @@ function mapDispatchToProps (dispatch) {
           showAddModal: false,
         }))
 
-        // todo 刷新列表
         dispatch(addAction({
           newItem,
         }))
