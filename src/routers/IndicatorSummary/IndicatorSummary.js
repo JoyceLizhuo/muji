@@ -51,7 +51,7 @@ class IndicatorSummary extends PureComponent {
   }
 
   render () {
-    const { showAddModal, handleCancleModal, indicatorList, handleAdd, handleShowAddModal } = this.props
+    const { showAddModal, handleCancleModal, indicatorList, handleShowAddModal } = this.props
     const tableDatasource = indicatorList.filter(({ indicatorName }) => (indicatorName.toLowerCase().includes(this.state.searchedValue.toLowerCase())))
     return (
       <Layout className="indicator_summary">
