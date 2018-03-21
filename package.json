@@ -98,14 +98,5 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:3001",
-      "changeOrigin": true
-    },
-    "/api-mock": {
-      "target": "http://localhost:3001"
-    }
   }
 }

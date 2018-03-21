@@ -6,6 +6,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
+import {  } from 'react-router'
 import { Table, Menu, Dropdown, Icon, Popconfirm, message, Modal } from 'antd'
 import { createAction } from 'redux-actions'
 import types from '../../../util/actionTypes'
@@ -162,7 +163,7 @@ class IndicatorTable extends PureComponent {
         >
           <IndicatorAddForm
             defaultValue={defaultFormValue}
-            onSuccess={(formValue) => { handleSubmit(edittingRecord.indicatorId, formValue) }}
+            onSuccess={(formValue) => { handleSubmit(edittingRecord.indicatorId, formValue, edittingRecord) }}
           />
         </Modal>
       </div>
@@ -208,19 +209,28 @@ const mapStateToProps = ({ indicatorSummary: { loading, showEditModal, edittingR
 
 const mapDispatchToProps = (dispatch) => {
   const setState = createAction(types.indicatorSummary_setState)
+  const modifyAction = createAction(types.indicatorSummary_indicatorModify)
 
   return {
     // 提交修改表单
-    async handleSubmit (indicatorId, formValue) {
+    async handleSubmit (indicatorId, formValue, edittingRecord) {
       try {
+        const submitData = {
+          ...edittingRecord,
+          ...formValue,
+        }
         await modifyIndicator({
           indicatorId,
-          data: formValue,
+          data: submitData,
         })
-        message.success('修改成功')
         dispatch(setState({
           showEditModal: false,
         }))
+        dispatch(modifyAction({
+          indicatorId,
+          submitData,
+        }))
+        message.success('修改成功')
       } catch (e) {
         console.log('修改指标失败', e)
         message.error('修改指标失败')

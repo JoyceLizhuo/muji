@@ -97,6 +97,7 @@ function mapStateToProps ({ indicatorSummary: { showAddModal, indicatorList } })
 
 function mapDispatchToProps (dispatch) {
   const setState = createAction(types.indicatorSummary_setState)
+  const addAction = createAction(types.indicatorSummary_indicatorAdd)
   return {
     async getIndicatorList () {
       try {
@@ -118,12 +119,17 @@ function mapDispatchToProps (dispatch) {
     // 新增一条指标
     async handleAdd (formData) {
       try {
-        await addIndicator({
+        const { data: { data: newItem } } = await addIndicator({
           data: formData
         })
         message.success('添加指标成功')
         dispatch(setState({
           showAddModal: false,
+        }))
+
+        // todo 刷新列表
+        dispatch(addAction({
+          newItem,
         }))
       } catch (e) {
         console.log('新增指标接口出错', e)

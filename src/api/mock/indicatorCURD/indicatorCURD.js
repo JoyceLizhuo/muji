@@ -154,8 +154,8 @@ module.exports = (req, res) => {
         res.json(r.modify)
         break
       case 'get': // 查
-        if (indicatorId === 'all') { // 查全部
-          res.json(r.getAll)
+        if (indicatorId === undefined) { // 查全部
+          res.json(r.getAll2)
         } else { // 查一条
           if (indicatorId === 'id__1') { // 返回数据图
             res.json(r.getChart)
