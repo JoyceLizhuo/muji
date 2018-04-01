@@ -6,33 +6,33 @@ import dateFormat from "./methods/dateFormat";
  */
 const indicatorType = {
   basic: {
-    label: '基本指标',
+    label: '基本--holder',
     value: 'basic',
   },
   normal: {
-    label: '普通指标',
+    label: '普通--holder',
     value: 'normal',
   },
   compound: {
-    label: '复合指标',
+    label: '复合--holder',
     value: 'compound',
   },
 }
 const config = {
-  // 指标类型
+  // --holder类型
   indicatorType,
 
-  // 指标信息table的columns
+  // --holder信息table的columns
   indicatorTableColumns: [{
-    title: '指标名称',
+    title: '--holder名称',
     dataIndex: 'indicatorName',
     key: 'indicatorName',
   }, {
-    title: '指标说明',
+    title: '--holder说明',
     dataIndex: 'indicatorIntro',
     key: 'indicatorIntro',
   }, {
-    title: '指标类型',
+    title: '--holder类型',
     dataIndex: 'indicatorType',
     key: 'indicatorType',
     render (text) {
@@ -48,7 +48,7 @@ const config = {
     dataIndex: 'dataSource',
     key: 'dataSource',
   }, {
-    title: '指标状态',
+    title: '--holder状态',
     dataIndex: 'indicatorStatus',
     key: 'indicatorStatus',
   }, {
@@ -69,7 +69,7 @@ const config = {
       </span>
     )
   }, {
-    title: '指标版本',
+    title: '--holder版本',
     dataIndex: 'indicatorVersion',
     key: 'indicatorVersion',
   }],

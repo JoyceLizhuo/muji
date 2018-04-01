@@ -113,7 +113,7 @@ class IndicatorTable extends PureComponent {
       return r
     })
     columns.push({
-      title: '指标操作',
+      title: 'edit',
       dataIndex: 'edit',
       key: 'edit',
       render (text, record) {
@@ -151,7 +151,7 @@ class IndicatorTable extends PureComponent {
           pagination={config.pagination}
         />
         <Modal
-          title="修改指标"
+          title="modify"
           visible={showEditModal}
           onCancel={handleCancleEditModal}
           footer={null}
@@ -183,15 +183,15 @@ IndicatorTable.propTypes = {
 
   // table的dataSource
   datasource: PropTypes.arrayOf(PropTypes.shape({
-    indicatorName: PropTypes.string, // 指标名称
-    indicatorIntro: PropTypes.string, // 指标说明
-    indicatorType: PropTypes.string, // 指标类型
+    indicatorName: PropTypes.string, // --holder名称
+    indicatorIntro: PropTypes.string, // --holder说明
+    indicatorType: PropTypes.string, // --holder类型
     dataSource: PropTypes.string, // 数据来源
-    indicatorStatus: PropTypes.string, // 指标状态
+    indicatorStatus: PropTypes.string, // --holder状态
     underBiz: PropTypes.string, // 所属业务
     createdBy: PropTypes.string, // 创建者
     createdAt: PropTypes.string, // 创建日期的时间戳
-    indicatorVersion: PropTypes.string, // 指标版本
+    indicatorVersion: PropTypes.string, // --holder版本
   })).isRequired,
 }
 
@@ -232,8 +232,8 @@ const mapDispatchToProps = (dispatch) => {
         }))
         message.success('修改成功')
       } catch (e) {
-        console.log('修改指标失败', e)
-        message.error('修改指标失败')
+        console.log('修改--holder失败', e)
+        message.error('修改--holder失败')
       }
     },
 
@@ -254,7 +254,7 @@ const mapDispatchToProps = (dispatch) => {
       }))
     },
 
-    // 删除一条指标
+    // 删除一条--holder
     async handleDeleteIndicator (indicatorId, indicatorName) {
       const deleteAction = createAction(types.indicatorSummary_indicatorDelete)
       try {
@@ -262,9 +262,9 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(deleteAction({
           deletedIndicatorId: indicatorId,
         }))
-        message.success(`成功删除指标：${indicatorName}`)
+        message.success(`成功删除--holder：${indicatorName}`)
       } catch (e) {
-        console.log('删除指标失败：', indicatorId, indicatorName)
+        console.log('删除--holder失败：', indicatorId, indicatorName)
       }
     }
   }

@@ -15,5 +15,5 @@ if (process.env.NODE_ENV !== undefined && process.env.NODE_ENV !== 'development'
 module.exports = {
   login       : `${localPrefix}/login`, // 登录
   validate    : `${localPrefix}/validate`, // 鉴权
-  curdIndicator: `${apiPrefix}/indicator`, // 增删改查
+  curdIndicator: `${localPrefix}/indicator`, // 增删改查
 }

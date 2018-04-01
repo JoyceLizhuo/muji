@@ -1,5 +1,5 @@
 /**
- * 指标的CURD
+ * --holder的CURD
  */
 
 const delay = 500
@@ -7,16 +7,16 @@ function getList (num) {
   const r = []
   for (let i = num; i > 0; --i) {
     r.push({
-      indicatorName: `KP${i}`, // 指标名称
-      indicatorIntro: '介绍', // 指标说明
-      indicatorType: 'basic', // 指标类型
+      indicatorName: `KP${i}`, // --holder名称
+      indicatorIntro: '介绍', // --holder说明
+      indicatorType: 'basic', // --holder类型
       dataSource: 'MySQL', // 数据来源
-      indicatorStatus: '有效', // 指标状态
+      indicatorStatus: '有效', // --holder状态
       underBiz: '业务A', // 所属业务
       createdBy: 'wyh', // 创建者
       createdAt: `152099825471${i}`, // 创建日期的时间戳
-      indicatorVersion: 'V1', // 指标版本
-      indicatorSQL: 'select * from table xxxxxxx', // 指标SQL
+      indicatorVersion: 'V1', // --holder版本
+      indicatorSQL: 'select * from table xxxxxxx', // --holderSQL
       indicatorId: `id_${i}`,
     })
   }
@@ -48,7 +48,7 @@ module.exports = (req, res) => {
         createdBy: 'wyh',
         createdAt: '1520997254713',
         indicatorVersion: 'V1',
-        indicatorSQL: 'select * from table xxxxxxx', // 指标SQL
+        indicatorSQL: 'select * from table xxxxxxx', // --holderSQL
         indicatorId: 'id__1',
       }, {
         indicatorName: 'KP102-2',
@@ -60,7 +60,7 @@ module.exports = (req, res) => {
         createdBy: 'wyh',
         createdAt: '1520995254713',
         indicatorVersion: 'V1',
-        indicatorSQL: 'select * from table xxxxxxx', // 指标SQL
+        indicatorSQL: 'select * from table xxxxxxx', // --holderSQL
         indicatorId: 'id__2',
       }, {
         indicatorName: 'KP101-3',
@@ -72,7 +72,7 @@ module.exports = (req, res) => {
         createdBy: 'wyh',
         createdAt: '1520938254713',
         indicatorVersion: 'V1',
-        indicatorSQL: 'select * from table xxxxxxx', // 指标SQL
+        indicatorSQL: 'select * from table xxxxxxx', // --holderSQL
         indicatorId: 'id__3',
       },
         ...getList(5)
@@ -92,7 +92,7 @@ module.exports = (req, res) => {
           createdBy: 'wyh',
           createdAt: '1520997254713',
           indicatorVersion: 'V1',
-          indicatorSQL: 'select * from table xxxxxxx', // 指标SQL
+          indicatorSQL: 'select * from table xxxxxxx', // --holderSQL
           indicatorId,
         },
 
@@ -106,7 +106,7 @@ module.exports = (req, res) => {
             unit: '件', // 纵坐标的单位
           },
 
-          // 跟横坐标一一对应的具体指标数据
+          // 跟横坐标一一对应的具体--holder数据
           seriesData: [5, 20, 3600, 10, 10, 20, 120],
         },
       },
@@ -125,7 +125,7 @@ module.exports = (req, res) => {
           createdBy: 'wyh',
           createdAt: '1520997254713',
           indicatorVersion: 'V1',
-          indicatorSQL: 'select * from table xxxxxxx', // 指标SQL
+          indicatorSQL: 'select * from table xxxxxxx', // --holderSQL
           indicatorId,
         },
 
@@ -155,7 +155,7 @@ module.exports = (req, res) => {
         break
       case 'get': // 查
         if (indicatorId === undefined) { // 查全部
-          res.json(r.getAll2)
+          res.json(r.getAll)
         } else { // 查一条
           if (indicatorId === 'id__1') { // 返回数据图
             res.json(r.getChart)

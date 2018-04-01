@@ -39,7 +39,7 @@ class Login extends PureComponent {
           } = this.props
     return (
       <div className="login-page">
-        <h1 className="login-page-title">指标管理平台</h1>
+        <h1 className="login-page-title">--holder管理平台</h1>
         <div className="login-page-form-wrap">
           <FormItem {...formItemLayout} label="用户名">
             {getFieldDecorator('userName', {

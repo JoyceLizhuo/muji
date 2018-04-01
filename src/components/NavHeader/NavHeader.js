@@ -6,26 +6,25 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-// import { Menu, Icon } from 'antd'
+import { Menu, Icon } from 'antd'
 import UserButton from '../UserButton/UserButton'
 import './NavHeader.css'
 
-// const { SubMenu, ItemGroup: MenuItemGroup } = Menu
+const { SubMenu, ItemGroup: MenuItemGroup } = Menu
 
 class NavHeader extends PureComponent {
   render () {
-    // todo 以后要导航时取消掉下面的注释即可
     const nav = (
       <div className="main_page-nav">
         <Link className="site_name" to="/">
-          指标管理平台
+          HOME
         </Link>
-        {/*<Menu
+        {<Menu
           mode="horizontal"
           className="main_page-nav-list"
         >
           <Menu.Item key="mail">
-            <Icon type="table" />指标列表
+            <Icon type="table" />列表
           </Menu.Item>
           <Menu.Item key="app">
             <Icon type="appstore" />操作
@@ -43,7 +42,7 @@ class NavHeader extends PureComponent {
           <Menu.Item key="alipay">
             <Icon type="search" />搜索
           </Menu.Item>
-        </Menu>*/}
+        </Menu>}
       </div>
     )
     const { className } = this.props

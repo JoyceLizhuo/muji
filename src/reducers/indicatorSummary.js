@@ -1,11 +1,8 @@
-/**
- * 指标首页
- */
 import { handleActions } from 'redux-actions'
 import types from '../util/actionTypes'
 
 const defaultState = {
-  indicatorList: [], // 一次性加载的所有指标的列表
+  indicatorList: [], //
   loading: false,
   showAddModal: false,
 

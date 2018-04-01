@@ -30,8 +30,8 @@ class DetailPage extends PureComponent {
     const {
       loading,
       detailData: {
-        indicatorData, // 指标数据
-        base, // 此条指标的基本信息
+        indicatorData, // --holder数据
+        base, // 此条--holder的基本信息
       },
     } = this.props
     let chartResult = null
@@ -80,10 +80,10 @@ DetailPage.propTypes = {
   handleClearIndicatorDetailData: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   detailData: PropTypes.shape({
-    // 指标的基本信息
+    // --holder的基本信息
     base: PropTypes.shape({}),
 
-    // 指标数据
+    // --holder数据
     indicatorData: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
@@ -125,8 +125,8 @@ function mapDispatchToProps (dispatch) {
       dispatch(setState({
         loading: false,
         detailData: {
-          indicatorData: null, // 指标数据
-          base: null, // 此条指标的基本信息
+          indicatorData: null, // --holder数据
+          base: null, // 此条--holder的基本信息
         },
       }))
     }

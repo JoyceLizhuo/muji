@@ -63,7 +63,7 @@ class Search extends PureComponent {
           dataSource={this.getOption()}
           onSelect={this.handleSelect}
           onSearch={this.handleInput}
-          placeholder="请输入指标关键字"
+          placeholder="请输入--holder关键字"
         >
           <Input
             onPressEnter={this.handleSearch}

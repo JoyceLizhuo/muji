@@ -1,5 +1,5 @@
 /**
- * 以图形形式绘制的指标详情
+ * 以图形形式绘制的--holder详情
  */
 
 import React, { PureComponent } from 'react'

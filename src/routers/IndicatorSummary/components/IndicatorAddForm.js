@@ -1,5 +1,5 @@
 /**
- * 添加指标的表单
+ * 添加--holder的表单
  */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
@@ -116,11 +116,11 @@ class IndicatorAdd extends PureComponent {
       },
     } = this.props
     const columns = [{
-      title: '指标名称',
+      title: '--holder名称',
       dataIndex: 'indicatorName',
       key: 'indicatorName',
     }, {
-      title: '指标说明',
+      title: '--holder说明',
       dataIndex: 'indicatorIntro',
       key: 'indicatorIntro',
     }, {
@@ -132,7 +132,7 @@ class IndicatorAdd extends PureComponent {
       dataIndex: 'createdBy',
       key: 'createdBy',
     }, {
-      title: '指标操作',
+      title: '--holder操作',
       dataIndex: 'edit',
       key: 'edit',
       render (text, record) {
@@ -147,40 +147,40 @@ class IndicatorAdd extends PureComponent {
     return (
       <div className={`${className} indicatorAddForm`}>
         <div className="indicatorAddForm-form_wrap">
-          <FormItem {...formItemLayout} label="指标名称">
+          <FormItem {...formItemLayout} label="--holder名称">
             {getFieldDecorator('indicatorName', {
               initialValue: indicatorName,
               rules: [{
                 required: true,
-                message: '请输入指标名称',
+                message: '请输入--holder名称',
               }],
             })(
               <Input
-                placeholder="请输入指标名称"
+                placeholder="请输入--holder名称"
                 onChange={this.handleIndicatorNameChange}
               />
             )}
           </FormItem>
-          <FormItem {...formItemLayout} label="指标说明">
+          <FormItem {...formItemLayout} label="--holder说明">
             {getFieldDecorator('indicatorIntro', {
               initialValue: indicatorIntro,
               rules: [{
                 required: true,
-                message: '请输入指标说明',
+                message: '请输入--holder说明',
               }],
             })(
               <Input
-                placeholder="请输入指标说明"
+                placeholder="请输入--holder说明"
                 onChange={this.handleIndicatorIntroChange}
               />
             )}
           </FormItem>
-          <FormItem {...formItemLayout} label="指标类型">
+          <FormItem {...formItemLayout} label="--holder类型">
             {getFieldDecorator('indicatorType', {
               initialValue: indicatorType || config.indicatorTypeArray[0].value,
               rules: [{
                 required: true,
-                message: '请输入指标类型',
+                message: '请输入--holder类型',
               }],
             })(
               <RadioGroup
@@ -220,16 +220,16 @@ class IndicatorAdd extends PureComponent {
               </Select>
             )}
           </FormItem>
-          <FormItem {...formItemLayout} label="指标SQL">
+          <FormItem {...formItemLayout} label="--holderSQL">
             {getFieldDecorator('indicatorSQL', {
               initialValue: indicatorSQL,
               rules: [{
                 required: true,
-                message: '请输入指标SQL',
+                message: '请输入--holderSQL',
               }],
             })(
               <TextArea
-                placeholder="请输入指标SQL"
+                placeholder="请输入--holderSQL"
                 rows={6}
                 onChange={this.handleIndicatorSQLChange}
               />
