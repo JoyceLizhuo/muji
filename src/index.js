@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { combineReducers, createStore } from 'redux'
+import jQuery from 'jquery'
 import { Modal } from 'antd'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Redirect } from 'react-router'
@@ -19,6 +20,7 @@ import LoginPage from "./routers/Login/LoginPage"
 import DetailPage from './routers/DetailPage/DetailPage'
 
 const api = require('./api/config')
+window.$ = jQuery
 
 const combinedReducer = combineReducers(reducers)
 const store = createStore(
