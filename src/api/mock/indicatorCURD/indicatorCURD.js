@@ -7,17 +7,11 @@ function getList (num) {
   const r = []
   for (let i = num; i > 0; --i) {
     r.push({
-      indicatorName: `KP${i}`, // --holder名称
-      indicatorIntro: '介绍', // --holder说明
-      indicatorType: 'basic', // --holder类型
-      dataSource: 'MySQL', // 数据来源
-      indicatorStatus: '有效', // --holder状态
-      underBiz: '业务A', // 所属业务
-      createdBy: 'wyh', // 创建者
-      createdAt: `152099825471${i}`, // 创建日期的时间戳
-      indicatorVersion: 'V1', // --holder版本
-      indicatorSQL: 'select * from table xxxxxxx', // --holderSQL
-      indicatorId: `id_${i}`,
+      img: '',
+      title: `我是标题${i}`,
+      desc: `我是描述${i}`,
+      address: `我是地址${i}`,
+      price: `3000${i}`,
     })
   }
   return r
@@ -38,44 +32,15 @@ module.exports = (req, res) => {
     },
     getAll: {
       ok: true,
-      data: [{
-        indicatorName: 'KP101-1',
-        indicatorIntro: '介绍',
-        indicatorType: 'basic',
-        dataSource: 'MySQL',
-        indicatorStatus: '有效',
-        underBiz: '业务B',
-        createdBy: 'wyh',
-        createdAt: '1520997254713',
-        indicatorVersion: 'V1',
-        indicatorSQL: 'select * from table xxxxxxx', // --holderSQL
-        indicatorId: 'id__1',
-      }, {
-        indicatorName: 'KP102-2',
-        indicatorIntro: '介绍',
-        indicatorType: 'compound',
-        dataSource: 'MySQL',
-        indicatorStatus: '有效',
-        underBiz: '业务B',
-        createdBy: 'wyh',
-        createdAt: '1520995254713',
-        indicatorVersion: 'V1',
-        indicatorSQL: 'select * from table xxxxxxx', // --holderSQL
-        indicatorId: 'id__2',
-      }, {
-        indicatorName: 'KP101-3',
-        indicatorIntro: '介绍',
-        indicatorType: 'normal',
-        dataSource: 'MySQL',
-        indicatorStatus: '有效',
-        underBiz: '业务C',
-        createdBy: 'wyh',
-        createdAt: '1520938254713',
-        indicatorVersion: 'V1',
-        indicatorSQL: 'select * from table xxxxxxx', // --holderSQL
-        indicatorId: 'id__3',
-      },
-        ...getList(5)
+      data: [
+        ...getList(5),
+        {
+          img: '',
+          title: `我是标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题`,
+          desc: `我是描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述`,
+          address: `我是地址地址地址地址地址地址地址地址地址地址`,
+          price: `30000000000000000000`,
+        },
       ],
     },
     getChart: {
