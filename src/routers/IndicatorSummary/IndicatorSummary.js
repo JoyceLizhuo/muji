@@ -10,6 +10,10 @@ class IndicatorSummary extends PureComponent {
     this.state = {}
   }
   componentDidMount () {
+    const $ = window.$
+    $.ajax({
+      url: api.curdIndicator,
+    })
   }
 
   render () {
