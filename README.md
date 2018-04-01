@@ -1,4 +1,4 @@
-# 指标管理平台
+# MUJI
 
 ## 框架
 creat-react-app生成的框架(ejected)加自定义的配置和包  
