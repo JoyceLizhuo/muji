@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import './IndicatorSummary.css'
 import Layout from '../../components/MainPageLayout/MainPageLayout'
+import api from '../../api/config'
 
 class IndicatorSummary extends PureComponent {
   constructor (props) {
@@ -10,7 +11,12 @@ class IndicatorSummary extends PureComponent {
   }
   componentDidMount () {
     const $ = window.$
-    console.log($('#rootId'))
+    $.ajax({
+        url: api.curdIndicator,
+        success (data) {
+            console.log(data)
+        }
+    })
   }
 
   render () {

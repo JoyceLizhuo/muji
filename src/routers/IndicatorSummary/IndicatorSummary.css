@@ -10,22 +10,30 @@
   }
 }
 ul.lists{
-  margin: 20px 30px;
   overflow: hidden;
+  border: 1px solid #dedede;
+  &li:last-child{
+    border-bottom: none;
+  }
   & li.item{
-    height: 80px;
+    height: 150px;
     padding: 5px 10px;
+    list-style: none;
+    border-bottom: 1px solid #dedede;
     & img.itemImg{
       display: block;
       float: left;
-      width: 80px;
-      height: 80px;
+      width: 140px;
+      height: 140px;
       background: #cccccc;
     }
     & div.itemContent{
       float: left;
+      height: 80px;
+      padding: 5px 10px;
       & .itemTitle{
-
+        font-size: 16px;
+        font-weight: bold;
       }
       & .itemDesc{
 
