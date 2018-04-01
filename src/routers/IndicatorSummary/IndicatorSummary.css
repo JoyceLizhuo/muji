@@ -1,4 +1,5 @@
 .btn{
+  margin: 20px 0;
   text-align: right;
   & button.more{
     width: 100px;
@@ -29,14 +30,25 @@ ul.lists{
     }
     & div.itemContent{
       float: left;
+      width: calc(100% - 150px);
       height: 80px;
       padding: 5px 10px;
+      & p {
+        margin-bottom: 5px;
+      }
       & .itemTitle{
         font-size: 16px;
         font-weight: bold;
+        height: 30px;
+        line-height: 30px;
       }
       & .itemDesc{
-
+        font-size: 14px;
+        line-height: 30px;
+        height: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #222222;
       }
       & .itemAddress{
         display: flex;
@@ -46,4 +58,10 @@ ul.lists{
       }
     }
   }
+}
+div.loadMore{
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
 }
